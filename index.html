@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メモアプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="notes" id="app">
+    <!-- サイドバー -->
+    <div class="notesSidebar">
+      <button class="notesAdd" type="button">ノートを追加</button>
+      <div class="notesList">
+        <div class="notesList-item">
+          <div class="notesSmall-title">javascriptの勉強</div>
+          <div class="notesSmall-body">今日はdivタグを学んだ。</div>
+          <div class="notesSmall-updated">2023/11/09</div>
+        </div>  
+      </div>
+    </div>
+    <!-- ノートプレビュー -->
+    <div class="notesPreview">
+      <input type="text" class="notesTitle" placeholder="タイトルを記入"/>
+      <textarea class="notesBody" placeholder="ここに本文を追加"></textarea>
+    </div>
+  </div>
+  <script src="./js/main.js" type="module"></script>
+</body>
+</html>
