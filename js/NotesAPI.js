@@ -17,10 +17,8 @@ export default class NotesAPI {
       existingNote.body = noteToSave.body
       existingNote.updated = new Date().toISOString()
     } else {
-      // noteToSave.id = Math.floor(Math.random() * 1000000);
-      // noteToSave.updated = new Date().toISOString();
-      // notes.push(noteToSave)
-      noteToSave.id = noteToSave.id
+      
+      noteToSave.id = Math.floor(Math.random() * 100000)
       noteToSave.updated = new Date().toISOString()
       notes.push(noteToSave)
     }
@@ -32,7 +30,7 @@ static deleteNote(id) {
   // メモの削除処理を実装する
   const notes = NotesAPI.getAllNotes();
   // 選択されたノートを削除
-  const newNotes = notes.filter((note) => note.id !== id);
+  const newNotes = notes.filter((note) => note.id != id);
   localStorage.setItem("notes", JSON.stringify(newNotes));
 }
 }

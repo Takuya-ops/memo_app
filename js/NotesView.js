@@ -8,7 +8,7 @@ export default class NotesView {
     this.onNoteEdit = onNoteEdit
     this.onNoteDelete = onNoteDelete
     this.root.innerHTML = `
-
+    
     <div class="notesSidebar">
       <button class="notesAdd" type="button">ノートを追加</button>
       <div class="notesList">
@@ -62,6 +62,8 @@ export default class NotesView {
   updateNoteList(notes) {
     const notesListContainer = this.root.querySelector(".notesList")
     
+    notesListContainer.innerHTML = ""
+
     for(const note of notes) {
       const html = this._createListItemHTML(
         note.id,
@@ -74,16 +76,14 @@ export default class NotesView {
     }
 
     // メモの選択
-    notesListContainer
-    .querySelectorAll(".notesList-item")
-    .forEach((noteListItem) => {
+    notesListContainer.querySelectorAll(".notesList-item").forEach((noteListItem) => {
       noteListItem.addEventListener("click", () => {
         // console.log(noteListItem.dataset)
         this.onNoteSelect(noteListItem.dataset.noteId)
       })
       // ダブルクリックは"dblclick"
       noteListItem.addEventListener("dblclick", () => {
-        const doDelete = confirm("本当に削除しても良いですか？")
+        const doDelete = confirm("本当に削除しても良いですか？");
 
         if (doDelete) {
           console.log("削除が確定されました");
@@ -94,5 +94,19 @@ export default class NotesView {
         };
       });
     });
+  }
+
+  updateActiveNote(note) {
+    // プレビュー欄にメモの内容を表示する
+    // .notesTile（メモを書く場所）
+    this.root.querySelector(".notesTitle").value = note.title;
+    this.root.querySelector(".notesBody").value = note.body;
+
+    // ハイライトを選択したものだけに付けるようにする
+    this.root.querySelectorAll(".notesList-item").forEach((noteListItem) => {
+      noteListItem.classList.remove("notesList-item--selected")
+    });
+
+    this.root.querySelector(`.notesList-item[data-note-id="${note.id}"]`).classList.add("notesList-item--selected")
   }
 }
